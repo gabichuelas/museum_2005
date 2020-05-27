@@ -16,4 +16,8 @@ class PatronTest < Minitest::Test
     assert_equal 20, @patron_1.spending_money
   end
 
+  def test_it_starts_with_no_interests
+    assert_equal [], @patron_1.interests
+  end
+
 end
