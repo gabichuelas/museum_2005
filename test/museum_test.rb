@@ -65,7 +65,7 @@ class MuseumTest < Minitest::Test
   end
 
   def test_can_group_patrons_by_exhibit_interest
-    
+
     @dmns.add_exhibit(@gems_and_minerals)
     @dmns.add_exhibit(@dead_sea_scrolls)
     @dmns.add_exhibit(@imax)
@@ -82,6 +82,6 @@ class MuseumTest < Minitest::Test
     @dmns.admit(@patron_3)
 
     assert_equal 3, @dmns.patrons.count
-    # assert_instance_of Hash, @dmns.patrons_by_exhibit_interest
+    assert_instance_of Hash, @dmns.patrons_by_exhibit_interest
   end
 end
