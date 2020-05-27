@@ -83,5 +83,11 @@ class MuseumTest < Minitest::Test
 
     assert_equal 3, @dmns.patrons.count
     assert_instance_of Hash, @dmns.patrons_by_exhibit_interest
+    assert_equal [], @dmns.patrons_by_exhibit_interest[@imax]
+    assert_equal 3, @dmns.patrons_by_exhibit_interest[@dead_sea_scrolls].count
+
+    patrons_for_dead_sea = @dmns.patrons_by_exhibit_interest[@dead_sea_scrolls]
+
+    assert_equal true, patrons_for_dead_sea.include?(@patron_2)
   end
 end
