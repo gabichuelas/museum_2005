@@ -38,13 +38,10 @@ class Museum
   end
 
   def ticket_lottery_contestants(exhibit)
-    contestants = []
-    patrons_by_exhibit_interest[exhibit].each do |patron|
-      if patron.spending_money < exhibit.cost
-        contestants << patron
-      end
+    patrons_by_exhibit_interest[exhibit].reduce([]) do |contestants, patron|
+      contestants << patron if patron.spending_money < exhibit.cost
+      contestants
     end
-    contestants
   end
 
   def draw_lottery_winner(exhibit)
