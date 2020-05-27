@@ -37,4 +37,19 @@ class Museum
     end
   end
 
+  def ticket_lottery_contestants(exhibit)
+    contestants = []
+    patrons_by_exhibit_interest[exhibit].each do |patron|
+      if patron.spending_money < exhibit.cost
+        contestants << patron
+      end
+    end
+    contestants
+  end
+
+  def draw_lottery_winner(exhibit)
+    # require "pry"; binding.pry
+    ticket_lottery_contestants(exhibit).sample.name
+  end
+
 end

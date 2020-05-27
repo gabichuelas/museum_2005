@@ -1,5 +1,6 @@
 require 'minitest/autorun'
 require 'minitest/pride'
+require 'mocha/minitest'
 require './lib/museum'
 require './lib/patron'
 require './lib/exhibit'
@@ -112,14 +113,20 @@ class MuseumTest < Minitest::Test
     assert_equal [patron_1, @patron_3], @dmns.ticket_lottery_contestants(@dead_sea_scrolls)
 
     # use stub for next assertion
+    @dmns.stubs(:draw_lottery_winner).returns(patron_1.name)
     assert_equal "Bob", @dmns.draw_lottery_winner(@dead_sea_scrolls)
-
-    assert_nil @dmns.draw_lottery_winner(@gems_and_minerals)
 
     assert_equal "Bob has won the IMAX exhibit lottery", @dmns.announce_lottery_winner(@imax)
 
-    assert_equal "No winners for this lottery", @dmns.announce_lottery_winner(@gems_and_minerals)
+    # @dmns.stubs(:draw_lottery_winner).returns(nil)
+    # assert_nil @dmns.draw_lottery_winner(@gems_and_minerals)
+    # 
+    # assert_equal "No winners for this lottery", @dmns.announce_lottery_winner(@gems_and_minerals)
   end
+
+
+
+
 
 
 end
