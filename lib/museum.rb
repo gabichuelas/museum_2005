@@ -11,11 +11,10 @@ class Museum
   end
 
   def recommend_exhibits(patron)
-    recs = []
-    @exhibits.each do |exhibit|
+    @exhibits.reduce([]) do |recs, exhibit|
       recs << exhibit if patron.interests.include?(exhibit.name)
+      recs
     end
-    recs
   end
 
   def admit(patron)
