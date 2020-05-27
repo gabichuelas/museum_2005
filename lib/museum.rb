@@ -52,12 +52,12 @@ class Museum
   end
 
   def announce_lottery_winner(exhibit)
-    winner = draw_lottery_winner(exhibit)
-    if winner
+    if ticket_lottery_contestants(exhibit).count > 0
+      winner = draw_lottery_winner(exhibit)
       "#{winner} has won the #{exhibit.name} exhibit lottery"
     else
       "No winners for this lottery"
-    end 
+    end
   end
 
 end

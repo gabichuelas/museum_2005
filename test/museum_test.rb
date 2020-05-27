@@ -101,6 +101,7 @@ class MuseumTest < Minitest::Test
     @dmns.add_exhibit(@imax)
     assert_equal 3, @dmns.exhibits.count
 
+    patron_1.add_interest("IMAX")
     patron_1.add_interest("Gems and Minerals")
     patron_1.add_interest("Dead Sea Scrolls")
     @patron_2.add_interest("Dead Sea Scrolls")
@@ -120,7 +121,7 @@ class MuseumTest < Minitest::Test
 
     @dmns.stubs(:draw_lottery_winner).returns(nil)
     assert_nil @dmns.draw_lottery_winner(@gems_and_minerals)
-    #
+
     assert_equal "No winners for this lottery", @dmns.announce_lottery_winner(@gems_and_minerals)
   end
 
