@@ -22,17 +22,28 @@ class Museum
   end
 
   def patrons_by_exhibit_interest
+    # results = {}
+    # @exhibits.reduce(results) do |results, exhibit|
+    #   results[exhibit] ||= []
+    #   results
+    # end
+    #
+    # results.each do |exhibit, patrons|
+    #   results[exhibit] =
+    #   @patrons.find_all do |patron|
+    #     patron if patron.interests.include?(exhibit.name)
+    #   end
+    # end
+
+    # REFACTOR
     results = {}
     @exhibits.reduce(results) do |results, exhibit|
       results[exhibit] ||= []
-      results
-    end
-
-    results.each do |exhibit, patrons|
       results[exhibit] =
       @patrons.find_all do |patron|
         patron if patron.interests.include?(exhibit.name)
       end
+      results
     end
   end
 
@@ -44,7 +55,14 @@ class Museum
   end
 
   def draw_lottery_winner(exhibit)
-    ticket_lottery_contestants(exhibit).sample.name
+    # ticket_lottery_contestants(exhibit).sample.name
+
+    # REFACTOR TO ACCOUNT FOR NIL RESULT (in the case of no contestants)
+    if ticket_lottery_contestants(exhibit).count > 0
+      ticket_lottery_contestants(exhibit).sample.name
+    else
+      return nil
+    end
   end
 
   def announce_lottery_winner(exhibit)
